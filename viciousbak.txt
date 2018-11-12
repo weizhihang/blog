@@ -1,0 +1,5 @@
+景安网络：该文件记录站点中扫描出来的疑似恶意文件路径！
+/1/3/include/Smarty/libs/Smarty.class.php
+/1/2/uc_client/model/base.php
+/1/2/source/admincp/admincp_members.php
+/1/2/source/function/function_core.php

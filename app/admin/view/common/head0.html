@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{:config('sys_name')}后台管理</title>
+
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <meta http-equiv="cache-control" content="no-cache,no-store, must-revalidate" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="icon" href="http://www.sunshinecom.cn/public/uploads/20180810/4557e50845cf556d2455722f0071c311.jpg" type="image/x-icon"/>
+    <link rel="stylesheet" href="__ADMIN__/css/global.css" media="all">
+    <link rel="stylesheet" href="__STATIC__/common/css/font.css" media="all">
+    <link rel="stylesheet" href="__STATIC__/plugins/layui/css/layui.css" media="all" />
+    <script type="text/javascript" src="__STATIC__/plugins/layui/layui.js"></script>
+
+</head>
+<body class="skin-<?php if(!empty($_COOKIE['skin'])){echo $_COOKIE['skin'];}else{echo '0';setcookie('skin','0');}?>">

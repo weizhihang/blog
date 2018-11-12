@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="EdieLei" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title>人脸检测</title>
+    <style>
+        #photo{ width:100px; height:100px; margin:auto; margin-top:100px; background:#0cc; border-radius:100px;}
+        #photo img{ width:100px; height:100px; border-radius:50px;}
+        /*#photo img{ width:100px; height:100px; border-radius:50px;}*/
+        .xuanze{
+            width: 61%;
+            margin: 10% auto;
+            font-size: x-large;
+            line-height: 50px;
+            text-align: center;
+            background-color: #00a65a;
+            border-radius:30px;
+        }
+    </style>
+    <script src="__STATIC__/common/js/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(function(){
+            $('#img').change(function(){
+                    file = this.files[0];
+                var r = new FileReader();
+                r.readAsDataURL(file);
+                $(r).load(function(){
+
+                    $('#photo').html('<img src="'+ this.result +'" alt="" />');
+                })
+            })
+        })
+
+    </script>
+</head>
+<body>
+<h3>人脸检测</h3>
+<div id="photo"></div>
+<form action="face_res.html" method="post" enctype="multipart/form-data">
+    <div class="xuanze">
+        <label for="img" style="">选择图片</label>
+        <!--<input type="radio" name="sex" id="female" />-->
+        <input id="img" name="img" type="file" accept="image/*" hidden />
+    </div>
+    <div class="xuanze">
+        <label for="btn">提交</label>
+        <button id="btn" style="display: none">提交</button>
+    </div>
+
+</form>
+</body>
+</html>

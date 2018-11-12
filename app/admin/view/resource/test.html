@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--<form method="post" enctype="multipart/form-data" id="uploadForm">-->
+<form method="post" action="http://up.qiniu.com" enctype="multipart/form-data" id="uploadForm" name="uploadForm">
+
+
+    <input name="token" type="hidden" value="" id="token">
+
+    <input name="file" type="file" />
+    <!--<input name="file[]" type="file" />-->
+    <!--<input name="file[]" type="file" />-->
+    <!--<a href="#" id="btn">点击</a>-->
+    <!--<input type="submit" value="上传" style="display: none" id="sub">-->
+    <input type="submit" value="上传" id="sub">
+</form>
+</body>
+</html>
+<script type="text/javascript" src="/public/static/lib/css3jquery/js/jquery.min.js"></script>
+<script type="text/javascript" src="/public/static/lib/css3jquery/js/jquery-ui.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+    //     //$("#submitbtn").click(function(){
+    //     setTimeout(function(){//两秒后跳转
+    //
+    //         $("#pic").hide();
+    //         $("#dv").show();
+    //         myVideo.play();
+    //     },2000);
+    //     // });
+        $.post("{:url('admin/Resource/token1')}",'',function (res) {
+            $("#token").val(res);
+            console.log(res);
+            // alert(res);
+        },'json')
+    });
+    // $("#btn").click(function () {
+    //     $.post("{:url('admin/Resource/token')}",'',function (res) {
+    //         // $("#token").val(res);
+    //         console.log(res);
+    //         // alert(res);
+    //         // var htnl = '<input name="token" type="hidden" value="'+res+'" id="token">';
+    //         var file = document.querySelector('[type=file]');
+    //         // 通过FormData将文件转成二进制数据
+    //         var formData = new FormData();
+    //         // 将文件转二进制
+    //
+    //         formData.append('file', file.files[0]);
+    //         formData.append("token",res);
+    //         console.log(formData);
+    //         // alert(formData);
+    //         $.ajax({
+    //             url:"http://up.qiniu.com",
+    //             type:"POST",
+    //             dataType:"json",
+    //             data:formData,
+    //             contentType: false,
+    //             processData: false,
+    //             success:function(data) {
+    //                 consloe.log(data.key);
+    //                 // if(data.url !="" && data.url != null){
+    //                 //     $("#newsImgUrl").val(data.url);
+    //                 //     var url = data.url;
+    //                 //     //将上传的文件回显
+    //                 //     $("#showUploadImg").css("display","block");
+    //                 //     $("#showUploadImg").attr("src","../download/news/images/"+data.fileName);
+    //                 //     $("#message").text("上传成功!");
+    //                 // }else{
+    //                 //     $("#message").text("上传失败!请仔细检查您的图片类型和大小");
+    //                 // }
+    //             }
+    //         });
+    //     },'json');
+    //     // $("#sub").click();
+    // })
+
+</script>

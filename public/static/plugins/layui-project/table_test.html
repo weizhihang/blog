@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>table模块快速使用</title>
+    <link rel="stylesheet" href="./layui/css/layui.css" media="all">
+</head>
+<body>
+
+<table id="demo" lay-filter="test"></table>
+
+<script src="./layui/layui.js"></script>
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            // ,height: 500
+           ,url: '/admin/Blog/index0/' //数据接口
+            ,page: true //开启分页
+            // ,url: 'http://www.sunshinecom.cn/admin/Blog/index0' //数据接口
+            // ,jump: function(obj){
+            //     console.log(obj)
+            // }
+            // ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+            ,response:{
+                statusName:'code'
+                ,statusCode:0
+                ,msgName:'msg'
+                ,countName:'count'
+                ,dataName:'data'
+            }
+            ,cols: [[ //表头
+//                {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
+//                ,{field: 'username', title: '用户名', width:80}
+//                ,{field: 'sex', title: '性别', width:80, sort: true}
+//                ,{field: 'city', title: '城市', width:80}
+//                ,{field: 'sign', title: '签名', width: 177}
+//                ,{field: 'experience', title: '积分', width: 80, sort: true}
+//                ,{field: 'score', title: '评分', width: 80, sort: true}
+//                ,{field: 'classify', title: '职业', width: 80}
+//                ,{field: 'wealth', title: '财富', width: 135, sort: true}
+                {field: 'id', title: 'ID', width:80, sort: true, fixed: 'right'}
+                ,{field: 'title', title: '用户名', width:80}
+                ,{field: 'author', title: '性别', width:80}
+                ,{field: 'keyword', title: '城市', width:80}
+            ]]
+
+        });
+
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!--blogsbox begin-->
+<div class="blogsbox">
+    {volist name="list" id="vo"}
+    <div class="blogs" data-scroll-reveal="enter bottom over 1s" >
+
+        {if condition="$vo.thumb neq ''"}
+        <span class="blogpic">
+        <!--<span class="blogpic" style="float: right">-->
+      <a href="/Blog/{$vo.id}" title=""><img src="{$vo.thumb|default='http://space.sunshinecom.cn/images/toppic02.jpg'}" alt=""></a>
+      </span>
+        {/if}
+        <!--<span class="blogpic" style="float: right">-->
+        <!--<a href="/" title=""><img src="{$vo.thumb|default='/public/static/index/images/toppic02.jpg'}" alt=""></a>-->
+        <!--</span>-->
+        <h3 class="blogtitle"><a href="/Blog/{$vo.id}" target="_blank">{$vo.title}</a></h3>
+        <p class="blogtext">{$vo.description}</p>
+        <div class="bloginfo">
+            <ul>
+                <li class="author"><a href="javascript:;">博主</a></li>
+                <li class="lmname"><a href="javascript:;">技术博客</a></li>
+                <li class="timer">{$vo.create_time}</li>
+                <li class="view">{$vo.click}已阅读</li>
+                <li class="like">{$vo.heart}</li>
+            </ul>
+        </div>
+
+    </div>
+    {/volist}
+    <div class="pagelist">
+        {$page}
+    </div>
+</div>
+<!--blogsbox end-->

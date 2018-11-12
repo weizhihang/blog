@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="EdieLei" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+    <title>HTML5 图片上传预览</title>
+    <style>
+        .count{
+            width: 90%;
+            margin:auto;
+        }
+        #photo{
+            width:100%;
+            /*margin-left:10%;*/
+            /*background:#0cc;*/
+            }
+        #photo img{
+            width:100%;
+            /*height:100%;*/
+            /*border-radius:50px;*/
+        }
+        .text{
+            margin-top: -80%;
+
+            position: absolute;
+            /*float: right;*/
+        }
+        p{
+            background:#0cc;
+        }
+        /*#photo img{ width:100px; height:100px; border-radius:50px;}*/
+    </style>
+    <script src="__STATIC__/common/js/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $('#img').change(function(){
+                    file = this.files[0];
+                var r = new FileReader();
+                r.readAsDataURL(file);
+                $(r).load(function(){
+                    $('#photo').html('<img src="'+ this.result +'" alt="" />');
+                })
+            })
+        })
+
+    </script>
+</head>
+<body>
+<h3>测试结果</h3>
+<!--<form action="face1" method="post" enctype="multipart/form-data">-->
+    <!--<input id="img" name="img" type="file" accept="image/*" />-->
+    <!--<button id="btn">提交</button>-->
+<!--</form>-->
+<div class="count">
+    <div id="photo">
+        <img src="{$url}" alt="">
+    </div>
+    <div class="text">
+        {volist name="count" id="data"}
+        {volist name="data" id="v"}
+        <p>{$v['key']}:{$v['val']}</p>
+        {/volist}
+        {/volist}
+    </div>
+</div>
+
+</body>
+</html>
+<!--<script>-->
+    <!--$('#btn').click(function () {-->
+        <!--var img = $('#photo').find('img').val();-->
+        <!--alter(img);-->
+        <!--$.post("face1", { "img": base64Data,"file":file },function (data)-->
+        <!--{-->
+<!--//           var name = data.filename;-->
+            <!--location.href="info.php?name="+data.name;-->
+<!--//           alert(data.name);-->
+<!--////            printHtml("解析结果："+result.data);-->
+<!--//            if (result.status == "success" && result.data!="")-->
+<!--//            {-->
+<!--//                printHtml("解析结果成功！");-->
+<!--//            }else{-->
+<!--//                startPat();//如果没有解析出来则重新抓拍解析-->
+<!--//            }-->
+<!--//           var con= '<table>';-->
+<!--//           var td = '';-->
+<!--//           var i = 0;-->
+<!--//           for(i= 0;i<data.length;i++){-->
+<!--//               td = td + '<tr><td>'+data.data[i].item+'</td> <td>'+data.data[i].itemstring+'</td> </tr>';-->
+<!--//           }-->
+<!--//           var last = '</table>';-->
+<!--//           var content = con+td+last;-->
+<!--//           $('#tab').html(content);-->
+<!--//           alert(data.status);-->
+<!--//           alert(data.status)-->
+<!--//           if(result.status==1){-->
+<!--//-->
+<!--//               printHtml(result.errorcode)-->
+<!--//           }else {-->
+<!--//        printHtml(result.errorCode)}-->
+
+        <!--},"json");-->
+    <!--})-->
+
+<!--</script>-->

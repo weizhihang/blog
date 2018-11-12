@@ -1,0 +1,261 @@
+{include file="common/head"/}
+<div class="admin-main layui-anim layui-anim-upbit">
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>{:lang('user')}{:lang('list')}</legend>
+    </fieldset>
+<div class="demoTable">
+    搜索ID：
+    <div class="layui-inline">
+        <input class="layui-input" name="id" id="demoReload" autocomplete="off">
+    </div>
+    <button class="layui-btn" data-type="reload"><i class="layui-icon">&#xe615;</i></button>
+    <button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
+    <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
+    <button class="layui-btn" data-type="isAll">验证是否全选</button>
+    <button class="layui-btn" data-type="add"><i class="layui-icon">&#xe608;</i></button>
+    <button class="layui-btn layui-btn-danger layui-btn-mini" data-type="delAll"><i class="layui-icon">&#xe640;</i></button>
+    <button class="layui-btn" data-type="onreload"><i class="layui-icon">&#xe9aa;</i></button>
+
+</div>
+    <table id="demo" lay-filter="demo"></table>
+</div>
+<!--<script type="text/html" id="status">-->
+    <!--&lt;!&ndash; 这里的 checked 的状态只是演示 &ndash;&gt;-->
+    <!--<input type="checkbox" name="status" value="{{d.status}}" lay-skin="switch" lay-text="下架|发布" lay-filter="statusDemo" {{ d.status == 1 ? 'checked' : '' }}>-->
+<!--</script>-->
+<script type="text/html" id="status">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="checkbox" name="status" value="{{d.id}}" title="发布" lay-filter="lockDemo" {{ d.status == 1 ? 'checked' : '' }}>
+</script>
+<script type="text/html" id="thumb">
+    <a lay-event="thumb" title="点击查看"><i class="layui-icon">&#xe64a;</i> </a>
+</script>
+{include file="common/foot"/}
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            ,url: '{$url}' //数据接口
+            ,page: true //开启分页
+            ,cols: [[ //表头
+                {type:'checkbox', fixed: 'left'}
+                ,{field: 'id', title: 'ID', sort: true, fixed: 'left'}
+                // ,{field: 'username', title: '作者'}
+                ,{field: 'title', title: '标题', sort: true}
+                ,{field: 'catname', title: '分类',}
+                ,{field: 'click', title: '点击量', sort: true}
+                ,{field: 'heart', title: '点赞量', sort: true}
+                ,{field: 'keywords', title: '关键词'}
+                ,{field: 'thumb', title: '缩略图', templet: '#thumb'}
+                ,{field: 'status', title: '状态', templet: '#status'}
+                ,{fixed: 'right', title: '操作', align:'center', toolbar: '#barDemo'}
+            ]]
+        });
+
+        //监听表格复选框选择
+        table.on('checkbox(demo)', function(obj){
+            // console.log(obj)
+        });
+        //监听工具条
+        table.on('tool(demo)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'detail'){
+                // layer.msg('ID：'+ data.id + ' 的查看操作');
+                var url = '/Blog/'+ data.id;
+                iframe(url,'');
+            } else if(obj.event === 'del'){
+                dels(data);
+            }else if(obj.event === 'edit'){
+                // layer.alert('编辑行：<br>'+ JSON.stringify(data))
+                var url = 'edit?id='+ data.id;
+                location.href = url;
+                    // iframe(url);
+            }else if(obj.event === 'thumb'){
+                var img = '暂无图像';
+                if(data.thumb){
+                    img = '<img src="'+data.thumb+'" alt="">';
+                }
+                layer.open({
+                    type: 3,
+                    closeBtn: 1,
+                    title: false, //不显示标题
+                    skin: 'layui-layer-nobg', //没有背景色
+                    shadeClose: true, //点击遮罩关闭
+                    shade: 0.8,
+                    offset: ['20%', '20%'],
+                    // area:['auto','auto'],
+                    //area: [img.width + 'px', img.height+'px'],
+                    content: img, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+                    //cancel: function () {
+                    //layer.msg('图片查看结束！', { time: 5000, icon: 6 });
+                    //}
+                });
+            }
+        });
+
+        var $ = layui.$, active = {
+            getCheckData: function(){ //获取选中数据
+                var checkStatus = table.checkStatus('demo')
+                    ,data = checkStatus.data;
+                layer.alert(JSON.stringify(data));
+            }
+            ,getCheckLength: function(){ //获取选中数目
+                var checkStatus = table.checkStatus('demo')
+                    ,data = checkStatus.data;
+                layer.msg('选中了：'+ data.length + ' 个');
+            }
+            ,isAll: function(){ //验证是否全选
+                var checkStatus = table.checkStatus('demo');
+                layer.msg(checkStatus.isAll ? '全选': '未全选')
+            }
+            ,add: function(){ //添加
+                // var url = 'add';
+                location.href = 'add';
+                    // iframe(url);
+            }
+            ,delAll: function(){ //全删
+                var checkStatus = table.checkStatus('demo')
+                    ,data = checkStatus.data;
+                // console.log(data[0].id)
+                dels(data);
+                // console.log(data);
+                // layer.alert(JSON.stringify(data));
+            }
+            ,reload: function(){
+                table.reload('demo', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    ,where: {
+                        title: $('#demoReload').val()
+                    }
+                });
+            }
+            ,onreload: function(){
+
+                var cr=$(".layui-laypage-skip input").val();//获取当前页码
+                table.reload('demo', {
+                    page: {
+                        curr: cr //重新从第 1 页开始
+                    }
+                    ,where: {
+                        title: $('#demoReload').val()
+                    }
+                });
+            }
+        };
+        $('.demoTable .layui-btn').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+
+    function iframe(url,title) {        //iframe层
+        layer.open({
+            type: 2,
+            title: title,
+            shadeClose: true, //点击遮罩关闭
+            shade: 0.1,
+            area: ['70%', '100%'],
+            maxmin: true,
+            closeBtn: 1,
+            content: [url, 'yes'], //iframe的url，yes是否有滚动条
+            // end: function () {
+            //     location.reload();
+            // }
+
+        });
+    };
+    //删除/单删&多删
+    function dels(data) {
+        var num = data.length;
+        var ids = '';
+        // console.log(num);
+        if(num!=1){
+            for(var p in data) {
+                ids = ids+','+data[p].id;
+            }
+            ids=ids.substr(1);
+        }else {
+            ids = data.id;
+            num = '';
+        }
+        // console.log(ids);
+        layer.confirm('删除id为'+ids+'这'+num+'条数据？' ,{
+            btn: ['是','否'] ,//按钮
+            icon:5
+        }, function(){
+            $.post("dels",{ids:ids},function(res){
+                // location.href="{:url('admin/Users/login')}";
+                layer.msg(res.msg);
+                if(res.status==1){
+                    location.reload();
+                }
+            },'json')
+        });
+    }
+</script>
+<script type="text/javascript" src="__STATIC__/common/js/jquery.min.js"></script>
+
+<script>
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+        //监听性别操作
+        form.on('switch(sexDemo)', function(obj){
+            // layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
+            var id = this.value;
+            var name = this.name;
+            var val;
+            if(obj.elem.checked == true){
+                val = 1;
+            }else {
+                val = 0;
+            }
+            $.post("min_edit",{id:id,name:name,val:val},function(res){
+                if(res.status==1){
+                    layer.msg('成功');
+                }else {
+                    layer.msg('失败');
+                    location.reload();
+                }
+            },'json')
+        });
+        //监听锁定操作
+        form.on('checkbox(lockDemo)', function(obj){
+            // layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
+            var id = this.value;
+            var name = this.name;
+            var val;
+            if(obj.elem.checked == true){
+                val = 1;
+            }else {
+                val = 0;
+            }
+            $.post("min_edit",{id:id,name:name,val:val},function(res){
+                layer.msg('成功');
+                // if(res.status==1){
+                //     layer.msg('成功');
+                // }else {
+                //     layer.msg('失败');
+                //     location.reload();
+                // }
+            },'json')
+        });
+    });
+</script>
+</body>
+</html>

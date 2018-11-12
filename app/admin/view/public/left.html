@@ -1,0 +1,65 @@
+<!--<div class="layui-side layui-bg-black" id="admin-side">-->
+    <!--<div class="layui-side-scroll" id="admin-navbar-side" lay-filter="side">-->
+
+
+        <!--</div>-->
+        <!--</div>-->
+        <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+        <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+
+        <ul class="layui-nav layui-nav-tree " lay-filter="test">
+            {volist name='menus' id='vo'}
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">
+                        <i class="icon {$vo['icon']}" aria-hidden="true" data-icon="{$vo['icon']}"></i>
+                        <cite>{$vo.title}</cite>
+                        <span class="layui-nav-more"></span>
+                    </a>
+                    <dl class="layui-nav-child">
+                        {volist name='vo.children' id='son'}
+                    <dd title="{$son.title}" {eq name="son.id" value="2"} class="layui-this" {/eq} >
+                    <!--<dd title="{$son.title}" {eq name="son.title" value="2"} class="layui-this"{/eq} >-->
+                        <a href="{:url($son.href)}" data-url="{:url($son.href)}">
+                            <cite>{$son.title}</cite>
+                        </a>
+                    </dd>
+                        {/volist}
+                    </dl>
+                </li>
+                {/volist}
+            <!--<li class="layui-nav-item">-->
+                <!--<a href="javascript:;">-->
+                    <!--<i class="icon icon-cogs" aria-hidden="true" data-icon="icon-cogs"></i>-->
+                    <!--<cite>系统设置</cite>-->
+                    <!--<span class="layui-nav-more"></span>-->
+                <!--</a>-->
+                <!--<dl class="layui-nav-child">-->
+                    <!--<dd title="系统设置"><a href="javascript:;" data-url="/admin/System/system.html"><cite>系统设置</cite></a>-->
+                    <!--</dd>-->
+                    <!--<dd title="邮箱配置"><a href="javascript:;" data-url="/admin/System/email.html"><cite>邮箱配置</cite></a>-->
+                    <!--</dd>-->
+                <!--</dl>-->
+            <!--</li>-->
+            <!--<li class="layui-nav-item layui-nav-itemed">-->
+            <!--<a class="" href="javascript:;">所有商品<span class="layui-nav-more"></span></a>-->
+            <!--<dl class="layui-nav-child">-->
+            <!--<dd class="layui-this"><a href="javascript:;">列表一</a></dd>-->
+            <!--<dd><a href="javascript:;">列表二</a></dd>-->
+            <!--<dd><a href="javascript:;">列表三</a></dd>-->
+            <!--<dd><a href="">超链接</a></dd>-->
+            <!--</dl>-->
+            <!--</li>-->
+            <!--<li class="layui-nav-item">-->
+            <!--<a href="javascript:;">解决方案<span class="layui-nav-more"></span></a>-->
+            <!--<dl class="layui-nav-child">-->
+            <!--<dd><a href="javascript:;">列表一</a></dd>-->
+            <!--<dd><a href="javascript:;">列表二</a></dd>-->
+            <!--<dd><a href="">超链接</a></dd>-->
+            <!--</dl>-->
+            <!--</li>-->
+            <!--<li class="layui-nav-item"><a href="">云市场</a></li>-->
+            <!--<li class="layui-nav-item"><a href="">发布商品</a></li>-->
+            <span class="layui-nav-bar" style="top: 22.5px; height: 0px; opacity: 0;"></span></ul>
+    </div>
+</div>

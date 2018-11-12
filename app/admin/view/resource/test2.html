@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" action="{:url('admin/Resource/upload_test')}" enctype="multipart/form-data">
+<!--<form method="post" action="http://up.qiniu.com" enctype="multipart/form-data">-->
+    <!--<input name="token" type="hidden" value="<upload_token>" id="token">-->
+    <input name="file" type="file" />
+    <!--<input name="file[]" type="file" />-->
+    <!--<input name="file[]" type="file" />-->
+    <!--<div id="btn">点击</div>-->
+    <input type="submit" value="上传" id="sub">
+</form>
+</body>
+</html>
+<script type="text/javascript" src="/public/static/lib/css3jquery/js/jquery.min.js"></script>
+<script type="text/javascript" src="/public/static/lib/css3jquery/js/jquery-ui.min.js"></script>
+<script type="text/javascript">
+    $("#btn").click(function () {
+        var data = new FormData($('form')[0]);
+        console.log(data);
+        $.ajax({
+            url: "{:url('admin/Resource/upload_test')}",
+            type: 'POST',
+            data: data,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(data);
+                if(data.status){
+                    console.log('upload success');
+                }else{
+                    console.log(data.message);
+                }
+            },
+            error: function (data) {
+                console.log(data);
+                // console.log(data.status);
+            }
+        });
+    })
+</script>

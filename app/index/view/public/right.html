@@ -1,0 +1,73 @@
+<div class="sidebar">
+    <!--<div class="zhuanti">-->
+        <!--<h2 class="hometitle">特别推荐</h2>-->
+        <!--<ul>-->
+            <!--<li> <i><img src="/public/static/index/images/banner03.jpg"></i>-->
+                <!--<p>帝国cms调用方法 <span><a href="/">阅读</a></span> </p>-->
+            <!--</li>-->
+            <!--<li> <i><img src="/public/static/index/images/b04.jpg"></i>-->
+                <!--<p>5.20 我想对你说 <span><a href="/">阅读</a></span></p>-->
+            <!--</li>-->
+            <!--<li> <i><img src="/public/static/index/images/b05.jpg"></i>-->
+                <!--<p>个人博客，属于我的小世界！ <span><a href="/">阅读</a></span></p>-->
+            <!--</li>-->
+        <!--</ul>-->
+    <!--</div>-->
+    <div class="tuijian">
+        <h2 class="hometitle">推荐文章</h2>
+        <!--<ul class="tjpic">-->
+            <!--<i><img src="/public/static/index/images/toppic01.jpg"></i>-->
+            <!--<p><a href="/">别让这些闹心的套路，毁了你的网页设计</a></p>-->
+        <!--</ul>-->
+        <ul class="sidenews">
+            {volist name="heart" id="vo"}
+            <li>
+                {if condition="$vo.cover neq ''"}
+                <i><img src="{$vo.cover}"></i>
+                {/if}
+                <p><a href="/Blog/{$vo.id}" >{$vo.title}</a></p>
+                <span>{$vo.create_time|date="Y-m-d",###}</span> </li>
+            <li></li>
+            {/volist}
+        </ul>
+    </div>
+
+    <div class="tuijian">
+        <h2 class="hometitle">点击排行</h2>
+        <!--<ul class="tjpic">-->
+            <!--<i><img src="/public/static/index/images/toppic01.jpg"></i>-->
+            <!--<p><a href="/">别让这些闹心的套路，毁了你的网页设计</a></p>-->
+        <!--</ul>-->
+        <ul class="sidenews">
+            {volist name="click" id="vo"}
+            <li>
+                {if condition="$vo.cover neq ''"}
+                <i><img src="{$vo.cover}"></i>
+                {/if}
+                <p><a href="/Blog/{$vo.id}" >{$vo.title}</a></p>
+                <span>{$vo.create_time|date="Y-m-d",###}</span> </li>
+            <li></li>
+            {/volist}
+        </ul>
+    </div>
+
+    <div class="cloud">
+        <h2 class="hometitle">标签云</h2>
+        <ul>
+            {volist name="label" id="vo"}
+            <a href="/study?label_id={$vo.id}">{$vo.label}</a>
+            {/volist}
+        </ul>
+    </div>
+    <div class="guanzhu" id="follow-us">
+        <h2 class="hometitle">关注我们</h2>
+        <ul>
+            <!--<li class="sina"><a href="javascript:;" target="_blank"><span>新浪微博</span>杨青博客</a></li>-->
+            <!--<li class="tencent"><a href="javascript:;" target="_blank"><span>腾讯微博</span>杨青博客</a></li>-->
+            <!--<li class="qq"><a href="javascript:;" target="_blank"><span>QQ号</span>476847113</a></li>-->
+            <li class="email"><a href="javascript:;" target="_blank"><span>邮箱帐号</span>vzinger@163.com</a></li>
+            <li class="wxgzh"><a href="javascript:;" target="_blank"><span>微信号</span>vzinger</a></li>
+            <li class="wx"><img src="http://img.sunshinecom.cn/201807180938167454.jpg"></li>
+        </ul>
+    </div>
+</div>

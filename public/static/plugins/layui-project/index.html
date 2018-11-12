@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <script src="layui/layui.js"></script>
+    <script src="http://space.sunshinecom.cn/js/jquery.min.js" type="text/javascript"></script>
+
+    <style>
+        .center{
+            height: 850px;
+            background-color: #0bffb2;
+        }
+        .center div{
+            float: left;
+        }
+        .left{
+            height: 850px;
+            background-color: #fff1e2;
+        }
+        .content{
+            margin-top: 10px;
+            margin-left: 10px;
+            /*border: 1px solid grey;*/
+            background-color: whitesmoke;
+            width: 80%;
+        }
+        .top{
+            text-align: right;
+        }
+    </style>
+<body>
+<div class="top">
+    <ul class="layui-nav">
+        <li class="layui-nav-item">
+            <a href="">控制台<span class="layui-badge">9</span></a>
+        </li>
+        <li class="layui-nav-item">
+            <a href="">个人中心<span class="layui-badge-dot"></span></a>
+        </li>
+        <li class="layui-nav-item">
+            <a href=""><img src="http://t.cn/RCzsdCq" class="layui-nav-img">我</a>
+            <dl class="layui-nav-child">
+                <dd><a href="javascript:;">修改信息</a></dd>
+                <dd><a href="javascript:;">安全管理</a></dd>
+                <dd><a href="javascript:;">退了</a></dd>
+            </dl>
+        </li>
+    </ul>
+</div>
+
+<div class="center">
+    <div class="left">
+        <ul class="layui-nav layui-nav-tree " lay-filter="test">
+            <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+            <li class="layui-nav-item">
+            <!--<li class="layui-nav-item layui-nav-itemed">-->
+                <a href="javascript:;">默认展开</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;">选项1</a></dd>
+                    <dd><a href="javascript:;">选项2</a></dd>
+                    <dd><a href="">跳转</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;"><i class="layui-icon layui-icon-set" style="font-size: 15px; color: #1E9FFF;"></i>&nbsp;系统设置</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">移动模块</a></dd>
+                    <dd><a href="">后台模版</a></dd>
+                    <dd><a href="">电商平台</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href=""><i class="layui-icon layui-icon-username" style="font-size: 15px; color: #1E9FFF;"></i>&nbsp;会员管理</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="">
+                    <i class="layui-icon layui-icon-set" style="font-size: 15px; color: #1E9FFF;"></i>&nbsp;
+                    大数据
+                </a>
+            </li>
+        </ul>
+    </div>
+    <span class="layui-breadcrumb">
+      <a href="">首页</a>
+      <a href="">国际新闻</a>
+      <a href="">亚太地区</a>
+      <a><cite>正文</cite></a>
+    </span>
+    <div class="content">
+        <form class="layui-form"> <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+            <div class="layui-form-item">
+                <label class="layui-form-label">输入框</label>
+                <div class="layui-input-block">
+                    <input type="text" name="" placeholder="请输入" autocomplete="off" class="layui-input" id="shuru">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">下拉选择框</label>
+                <div class="layui-input-block">
+                    <select name="interest" lay-filter="aihao">
+                        <option value="0">写作</option>
+                        <option value="1">阅读</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">复选框</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" name="like[write]" title="写作">
+                    <input type="checkbox" name="like[read]" title="阅读">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">开关关</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" lay-skin="switch">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">开关开</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" checked lay-skin="switch">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">单选框</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="sex" value="0" title="男">
+                    <input type="radio" name="sex" value="1" title="女" checked>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">请填写描述</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+            <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+        </form>
+    </div>
+    <button class="dianji">点击</button>
+</div>
+<script>
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //各种基于事件的操作，下面会有进一步介绍
+    });
+</script>
+</body>
+</html>
+<script>
+    $(".dianji").click(function () {
+        alert($('#shuru').val())
+    });
+    //注意：导航 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function () {
+        var element = layui.element;
+
+        //…
+    });
+</script>

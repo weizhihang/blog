@@ -1,0 +1,117 @@
+{include file="common/head"/}
+<div class="admin-main layui-anim layui-anim-upbit" ng-controller="ctrl">
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>{$title}</legend>
+    </fieldset>
+    <form class="layui-form layui-form-pane" lay-filter="example">
+        <div class="layui-form-item">
+            <label class="layui-form-label">{:lang('title')}</label>
+            <div class="layui-input-4">
+                <input type="text" name="title" lay-verify="required" placeholder="{:lang('pleaseEnter')}文章标题" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">{:lang('descr')}</label>
+            <div class="layui-input-4">
+                <input type="text" name="description" lay-verify="required" placeholder="{:lang('pleaseEnter')}文章描述" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">{:lang('keyword')}</label>
+            <div class="layui-input-4">
+                <input type="text" name="keywords"lay-verify="required" placeholder="{:lang('pleaseEnter')}文章关键字" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">所属位置</label>
+            <div class="layui-input-4">
+                <select name="catid" lay-verify="required">
+                <!--<select name="category_id" lay-verify="required" ng-model="field.category_id" ng-options="v.id as v.category for v in group"  ng-selected="v.id==field.category_id">-->
+                    <option value="">请选择所属碎片分类</option>
+                    {volist name="category" id="vo"}
+                    <option value="{$vo.id}">{$vo.catname}</option>
+                    {/volist}
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">复选框</label>
+            <div class="layui-input-block">
+                {volist name="label" id="vo"}
+                <input type="checkbox" name="label_id[{$vo.id}]" title="{$vo.label}" value="{$vo.id}">
+                {/volist}
+                <script>
+                </script>
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">{:lang('content')}</label>
+            <div class="layui-input-block">
+                <!--<textarea class="layui-textarea layui-hide" name="content" lay-verify="content" id="content"></textarea>-->
+                <textarea class="layui-textarea layui-hide" name="text" lay-verify="text" id="text"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn" lay-submit="" lay-filter="submit">{:lang('submit')}</button>
+                <a href="{:url('index')}" class="layui-btn layui-btn-primary">{:lang('back')}</a>
+            </div>
+        </div>
+    </form>
+</div>
+{include file="common/foot"/}
+<!--<script src="__STATIC__/common/js/angular.min.js"></script>-->
+<script>
+        layui.use(['form', 'layedit', 'laydate','layer','jquery'], function(){
+            var form = layui.form
+                ,layer = layui.layer
+                ,layedit = layui.layedit
+                ,$ = layui.jquery
+                ,laydate = layui.laydate;
+            layedit.set({
+                uploadImage: {
+                    url: "{:url('UpFiles/editUpload')}",
+                    type: 'post'
+                }
+            });
+
+            if({$arr} !=null){
+                var arr = {$arr};
+                form.val('example', arr);
+            }
+            var layeCon = layedit.build('text');
+            // form.on('submit(submit)', function(data){
+            //     // layedit.sync(indexs)//同步数据
+            //     // var indexs = layedit.build('content'); //建立编辑器这里的ID是上面的id
+            //     layer.alert(layedit.getContent(layeCon));
+            //     var content = layedit.getContent(layeCon);
+            //     data.field.content = content;
+            //     layer.alert(JSON.stringify(data.field), {
+            //         title: '最终的提交信息'
+            //     })
+            //     return false;
+            // });
+            form.on('submit(submit)', function (data) {
+                // 提交到方法 默认为本身
+                var loading = layer.load(1, {shade: [0.1, '#fff']});
+                if(arr !=null){
+                    data.field.id = arr.id;
+                }
+                data.field.text = layedit.getContent(layeCon);
+                console.log(data.field);
+                $.post("", data.field, function (res) {
+                    layer.close(loading);
+                    if (res.code > 0) {
+                        layer.msg(res.msg, {time: 1800, icon: 1}, function () {
+                            location.href = res.url;
+                        });
+                    } else {
+                        layer.msg(res.msg, {time: 1800, icon: 2});
+                    }
+                },'json');
+            });
+
+        });
+</script>

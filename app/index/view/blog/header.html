@@ -1,0 +1,53 @@
+<header>
+    <!--menu begin-->
+<div class="menu">
+    <nav class="nav" id="topnav">
+        <h1 class="logo"><a href="/">个人博客</a></h1>
+        {volist name="nav" id="vo"}
+            <li><a href="{$vo.url}">{$vo.navigation}</a>
+                {notempty name="vo.son"}
+                <ul class="sub-nav">
+                    {volist name="vo.son" id="vo2" empty="dsf"}
+                    <li><a href="{$vo2.url}">{$vo2.navigation}</a></li>
+                    {/volist}
+                </ul>
+                {/notempty}
+
+            </li>
+        {/volist}
+        <!--search begin-->
+        <div id="search_bar" class="search_bar">
+            <form  id="searchform" action="[!--news.url--]e/search/index.php" method="post" name="searchform">
+                <input class="input" placeholder="想搜点什么呢..." type="text" name="keyboard" id="keyboard">
+                <input type="hidden" name="show" value="title" />
+                <input type="hidden" name="tempid" value="1" />
+                <input type="hidden" name="tbname" value="news">
+                <input type="hidden" name=" Submit" value="搜索" />
+                <span class="search_ico"></span>
+            </form>
+        </div>
+        <!--search end-->
+    </nav>
+</div>
+    <!--menu end-->
+    <!--mnav begin-->
+    <div id="mnav">
+        <h2><a href="http://www.yangqq.com" class="mlogo">个人博客</a><span class="navicon"></span></h2>
+        <dl class="list_dl">
+            {volist name="nav" id="vo"}
+                {notempty name="vo.son"}
+                    <dd class="list_dd">
+                        <ul>
+                            {volist name="vo.son" id="vo2" empty="dsf"}
+                            <li><a href="{$vo2.url}">{$vo2.navigation}</a></li>
+                            {/volist}
+                        </ul>
+                    </dd>
+            {else /}
+            <dt class="list_dt"> <a href="{$vo.url}">{$vo.navigation}</a> </dt>
+                {/notempty}
+            {/volist}
+        </dl>
+    </div>
+    <!--mnav end-->
+</header>
